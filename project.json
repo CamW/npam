@@ -1,0 +1,22 @@
+{
+  "name" : "Npam",
+  "description" : "Npam is a wrapper around Linux-PAM. The library provides the pinvoke interfaces required to interact with PAM and a layer of abstraction around PAM, built as a session class. For the Npam code, please have a look at https://github.com/camw/npam for usage, please have a look at https://github.com/camw/npam-example",
+  "authors" : [ "Cameron Waldron" ],
+  "version": "1.0.0-beta",
+  "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": false
+  },
+  "dependencies": {},
+  "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        }
+      },
+      "imports": "dnxcore50"
+    }
+  }
+}
