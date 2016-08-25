@@ -1,5 +1,5 @@
 # Npam
-Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information.
+Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information. Npam is build on Linux-PAM but should easily work with other unix systems.
 
 ##### Table of Contents  
 1. [Compatibility](#Compatibility)  
@@ -13,6 +13,7 @@ Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentica
   * [On Ubuntu](#On_Ubuntu)
   * [On Fedora](#On_Fedora)
   * [On Other Systems](#On_Other_Systems)
+4. [Future Plans](#Future_Plans)
 
 <a name="Compatibility"/>
 ##Compatibility
@@ -46,7 +47,7 @@ There are 2 interfaces into PAM through this library. NpamUser and NpamSession.
 
 <a name="NpamUser"/>
 ####NpamUser
-A static class with 3 public methods to call into PAM and related interfaces for group and account information. Useful when the calling application just needs to authenticate users and retrieve assoicated information and does not require more complex interaction with PAM. Only allows for interaction with PAM modules which require a single password response when to PAM conversation messages.
+A static class with 3 public methods to call into PAM and related interfaces for group and account information. Useful when the calling application just needs to authenticate users and retrieve assoicated information and does not require more complex interaction with PAM. Only allows for interaction with PAM modules which require a single password response to PAM conversation messages.
 
 For an example app using NpamUser, have a look here: https://github.com/CamW/npam/blob/master/src/Npam.Example.User/Program.cs
 
@@ -131,3 +132,8 @@ log  : Response status code does not indicate success: 404 (Not Found).
 <a name="On_Other_Systems"/>
 ### On Other Systems
 PAM is available on most *nix systems and this library should work on Mac, BSD and most linux distros. So feel free to give it a try and create a PR or issue.
+
+
+<a name="Future_Plans"/>
+## Future Plans
+Npam only supports a limited subset of what is available ultimately this should be expanded on.
