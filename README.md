@@ -46,7 +46,7 @@ From your home dir, clone repo:
 ```
 git clone https://github.com/camw/npam
 ```
-Run the setup test account script to create a test user. This created a user with username userxyz and a password of pwd123 which is used in the Npam test suite and can be used with the two example applications too: 
+Run the setup test account script to create a test user. This creates a user with username userxyz and a password of pwd123 which is used in the Npam test suite and can be used with the two example applications too: 
 ```
 ~/npam/test/setup_test_account.sh
 ```
@@ -79,7 +79,7 @@ From your home dir, clone repo:
 ```
 git clone https://github.com/camw/npam
 ```
-Run the setup test account script to create a test user. This created a user with username userxyz and a password of pwd123 which is used in the Npam test suite and can be used with the two example applications too: 
+Run the setup test account script to create a test user. This creates a user with username userxyz and a password of pwd123 which is used in the Npam test suite and can be used with the two example applications too: 
 ```
 ~/npam/test/setup_test_account.sh
 ```
