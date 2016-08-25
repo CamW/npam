@@ -7,6 +7,9 @@ Npam has been tested on Ubuntu 16.04 (dotnet version 1.0.0-preview2-003121) and 
 ##Using Npam
 The best way to make use of the Npam library is to include it as a nuget dependency. Npam is available on nuget at https://www.nuget.org/packages/Npam
 
+In addition to pulling Npam in from Nuget, you will also need to ensure that the PAM development libraries are installed for your distro.
+For Ubuntu:`sudo apt-get install libpam0g-dev` and for Fedora: `sudo dnf -y install pam-devel`
+
 Below is a sample project.json which includes a nuget dependency on Npam
 ```
 {
