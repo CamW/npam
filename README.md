@@ -136,4 +136,4 @@ PAM is available on most *nix systems and this library should work on Mac, BSD a
 
 <a name="Future_Plans"/>
 ## Future Plans
-Npam only supports a limited subset of what is available ultimately this should be expanded on.
+Npam only supports a limited subset of what is available ideally this should be expanded on.
