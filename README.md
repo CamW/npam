@@ -1,5 +1,5 @@
 # Npam
-Npam is a wrapper around Linux-PAM for dotnet core.
+Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information.
 
 ##### Table of Contents  
 1. [Compatibility](#Compatibility)  
