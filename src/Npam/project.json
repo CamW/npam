@@ -1,6 +1,6 @@
 {
   "name" : "Npam",
-  "description" : "Npam is a wrapper around Linux-PAM. The library provides the pinvoke interfaces required to interact with PAM and a layer of abstraction around PAM. Code and example usage available at https://github.com/camw/npam",
+  "description" : "Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information. Npam is built on Linux-PAM but should easily work with other unix systems.",
   "authors" : [ "Cameron Waldron" ],
   "version": "1.0.0",
   "buildOptions": {
