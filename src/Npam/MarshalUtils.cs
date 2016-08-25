@@ -13,9 +13,7 @@ namespace Npam {
         internal static IEnumerable<T> MarshalPtrPtrStructIn<T>(int ptrArraySize, IntPtr ptrToArray) where T : new() {
             for (int index = 0; index < ptrArraySize; index++) {
                 IntPtr structPtr = Marshal.ReadIntPtr(ptrToArray, index * PTR_SIZE);
-                T targetStruct = new T();
-                Marshal.PtrToStructure(structPtr, targetStruct);
-                yield return targetStruct;
+                yield return Marshal.PtrToStructure<T>(structPtr);
             }
         }
 

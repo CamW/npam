@@ -27,6 +27,10 @@ namespace Npam
             this.appData = appData;
         }
 
+        ///<summary>
+        /// Initializes the session. Must be called first.
+        /// http://linux.die.net/man/3/pam_start
+        ///</summary>
         public PamStatus Start() {
             PamConv conversation = new PamConv();
             conversation.ConversationCallback = HandlePamConversation;
@@ -40,6 +44,10 @@ namespace Npam
             }
         }
 
+        ///<summary>
+        /// Authenticates the user against PAM. Only ensures that the username and password are correct. Call AccountManagement to check that the account is in good standing.
+        /// http://linux.die.net/man/3/pam_authenticate
+        ///</summary>
         public PamStatus Authenticate(int flags) {
             lock(this.PamCallLock) {
                 EnsureSessionAlive();
@@ -48,6 +56,10 @@ namespace Npam
             }
         }
 
+        ///<summary>
+        /// Ensures that the account is in good standing - not locked out expired, etc.
+        /// http://linux.die.net/man/3/pam_acct_mgmt
+        ///</summary>
         public PamStatus AccountManagement(int flags) {
             lock(this.PamCallLock) {
                 EnsureSessionAlive();
@@ -56,6 +68,10 @@ namespace Npam
             }
         }
 
+        ///<summary>
+        /// Releases the PAM handle held as part of this session.
+        /// http://linux.die.net/man/3/pam_end
+        ///</summary>
         public PamStatus End() {
             lock(this.PamCallLock) {
                 if (this.pamHandle == IntPtr.Zero) return PamStatus.PAM_SUCCESS;
