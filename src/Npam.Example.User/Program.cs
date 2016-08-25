@@ -5,7 +5,7 @@ namespace ConsoleApplication
 {
     public class Program
     {
-        const string PamServiceName = "npam-demo";
+        const string PamServiceName = "passwd";
 
         public static void Main(string[] args)
         {
