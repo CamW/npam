@@ -3,32 +3,28 @@ Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentica
 
 ##### Table of Contents  
 1. [Compatibility](#Compatibility)  
-2. [Using the Npam Library](#Using_the_Npam_Library)
-  * [Npam prerequisits](#Npam_prerequisits)
-  * [Getting the Npam Library](#Getting_the_Npam_Library)
-  * [Calling into the Npam Library](#Calling_into_the_Npam_Library)
+2. [Using the Npam Library](#Using-the-Npam-Library)
+  * [Npam prerequisits](#Npam-prerequisits)
+  * [Getting the Npam Library](#Getting-the-Npam-Library)
+  * [Calling into the Npam Library](#Calling-into-the-Npam-Library)
     * [NpamUser](#NpamUser)
     * [NpamSession](#NpamSession)
-3. [Using the Npam source](#Using_the_Npam_source)
-  * [On Ubuntu](#On_Ubuntu)
-  * [On Fedora](#On_Fedora)
-  * [On Other Systems](#On_Other_Systems)
-4. [Future Plans](#Future_Plans)
+3. [Using the Npam source](#Using-the-Npam-source)
+  * [On Ubuntu](#On-Ubuntu)
+  * [On Fedora](#On-Fedora)
+  * [On Other Systems](#On-Other-Systems)
+4. [Future Plans](#Future-Plans)
 
-<a name="Compatibility"/>
-##Compatibility
+## Compatibility
 Npam has been tested on Ubuntu 16.04 (dotnet version 1.0.0-preview2-003121) and Fedora 23 (dotnet version 1.0.0-preview2-003121). However, PAM is available on most *nix systems and this library should work on Mac, BSD and most linux distros. So feel free to give it a try and create a PR or issue if you run into any problems.
 
-<a name="Using_the_Npam_Library"/>
-##Using the Npam Library
+## Using the Npam Library
 
-<a name="Npam_prerequisits"/>
-###Npam prerequisits
+### Npam prerequisits
 Before using the library, you will also need to ensure that the PAM development libraries are installed for your distro.
 For Ubuntu:`sudo apt-get install libpam0g-dev` and for Fedora: `sudo dnf -y install pam-devel`
 
-<a name="Getting_the_Npam_Library"/>
-###Getting the Npam Library
+### Getting the Npam Library
 The best way to make use of the Npam library is to include it as a nuget dependency. Npam is available on nuget at https://www.nuget.org/packages/Npam
 
 As below, you'll need to add a Npam dependency to your app's project.json and run dotnet restore to get the library.
@@ -41,28 +37,23 @@ As below, you'll need to add a Npam dependency to your app's project.json and ru
 }
 ```
 
-<a name="Calling_into_the_Npam_Library"/>
-###Calling into the Npam Library
+### Calling into the Npam Library
 There are 2 interfaces into PAM through this library. NpamUser and NpamSession.
 
-<a name="NpamUser"/>
-####NpamUser
+#### NpamUser
 A static class with 3 public methods to call into PAM and related interfaces for group and account information. Useful when the calling application just needs to authenticate users and retrieve assoicated information and does not require more complex interaction with PAM. Only allows for interaction with PAM modules which require a single password response to PAM conversation messages.
 
 For an example app using NpamUser, have a look here: https://github.com/CamW/npam/blob/master/src/Npam.Example.User/Program.cs
 
-<a name="NpamSession"/>
-####NpamSession
+#### NpamSession
 A session class which allows the calling application to establish a PAM session and interact with the session. Only destroying the underlying session on disposal of the NpamSession. NpamSession is more powerful than PamUser, allowing for custom PAM conversation handling and by extension, interaction with PAM modules which require more than just a password for authentication.
 
 For an example app using NpamSession, have a look here: https://github.com/CamW/npam/blob/master/src/Npam.Example.Session/Program.cs
 
-<a name="Using_the_Npam_source"/>
-##Using the Npam source
+## Using the Npam source
 
 Below are the commands you would use to get, restore, build and run the Npam library, tests and example applications.
 
-<a name="On_Ubuntu"/>
 ### On Ubuntu
 
 Install pam-devel: 
@@ -96,7 +87,6 @@ dotnet restore
 sudo dotnet test
 ```
     
-<a name="On_Fedora"/>
 ### On Fedora
 Install pam-devel: 
 ```
@@ -129,11 +119,9 @@ log  : Failed to download package from 'https://api.nuget.org/v3-flatcontainer/s
 log  : Response status code does not indicate success: 404 (Not Found).
 ```
 
-<a name="On_Other_Systems"/>
 ### On Other Systems
 PAM is available on most *nix systems and this library should work on Mac, BSD and most linux distros. So feel free to give it a try and create a PR or issue.
 
 
-<a name="Future_Plans"/>
 ## Future Plans
 Npam only supports a limited subset of what is available ideally this should be expanded on.
