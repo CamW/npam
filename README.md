@@ -4,15 +4,15 @@ Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentica
 ##### Table of Contents  
 1. [Compatibility](#compatibility)  
 2. [Using the Npam Library](#using-the-npam-library)
-  * [Npam prerequisits](#npam-prerequisits)
-  * [Getting the Npam Library](#getting-the-npam-library)
-  * [Calling into the Npam Library](#calling-into-the-npam-library)
+   * [Npam prerequisits](#npam-prerequisits)
+   * [Getting the Npam Library](#getting-the-npam-library)
+   * [Calling into the Npam Library](#calling-into-the-npam-library)
     * [NpamUser](#npamuser)
     * [NpamSession](#npamsession)
 3. [Using the Npam source](#using-the-npam-source)
-  * [On Ubuntu](#on-ubuntu)
-  * [On Fedora](#on-fedora)
-  * [On Other Systems](#on-other-systems)
+   * [On Ubuntu](#on-ubuntu)
+   * [On Fedora](#on-fedora)
+   * [On Other Systems](#on-other-systems)
 4. [Future Plans](#future-plans)
 
 ## Compatibility
