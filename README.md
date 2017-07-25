@@ -2,18 +2,18 @@
 Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information. Npam is built on Linux-PAM but should easily work with other unix systems.
 
 ##### Table of Contents  
-1. [Compatibility](#Compatibility)  
-2. [Using the Npam Library](#Using-the-Npam-Library)
-  * [Npam prerequisits](#Npam-prerequisits)
-  * [Getting the Npam Library](#Getting-the-Npam-Library)
-  * [Calling into the Npam Library](#Calling-into-the-Npam-Library)
-    * [NpamUser](#NpamUser)
-    * [NpamSession](#NpamSession)
-3. [Using the Npam source](#Using-the-Npam-source)
-  * [On Ubuntu](#On-Ubuntu)
-  * [On Fedora](#On-Fedora)
-  * [On Other Systems](#On-Other-Systems)
-4. [Future Plans](#Future-Plans)
+1. [Compatibility](#compatibility)  
+2. [Using the Npam Library](#using-the-npam-library)
+  * [Npam prerequisits](#npam-prerequisits)
+  * [Getting the Npam Library](#getting-the-npam-library)
+  * [Calling into the Npam Library](#calling-into-the-npam-library)
+    * [NpamUser](#npamuser)
+    * [NpamSession](#npamsession)
+3. [Using the Npam source](#using-the-npam-source)
+  * [On Ubuntu](#on-ubuntu)
+  * [On Fedora](#on-fedora)
+  * [On Other Systems](#on-other-systems)
+4. [Future Plans](#future-plans)
 
 ## Compatibility
 Npam has been tested on Ubuntu 16.04 (dotnet version 1.0.0-preview2-003121) and Fedora 23 (dotnet version 1.0.0-preview2-003121). However, PAM is available on most *nix systems and this library should work on Mac, BSD and most linux distros. So feel free to give it a try and create a PR or issue if you run into any problems.
