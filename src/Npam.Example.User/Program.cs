@@ -4,7 +4,7 @@ namespace Npam.Example.User
 {
     public class Program
     {
-        private const string PamServiceName = "passwd";
+        private const string ServiceName = "passwd";
 
         public static void Main(string[] args)
         {
@@ -13,7 +13,7 @@ namespace Npam.Example.User
             Console.Write("Password: ");
             var password = AcceptInputNoEcho();
 
-            if (NpamUser.Authenticate(PamServiceName, user, password))
+            if (NpamUser.Authenticate(ServiceName, user, password))
             {
                 Console.WriteLine("AUTHENTICATION - SUCCESS!");
                 Console.WriteLine("\rUSER GROUPS:");

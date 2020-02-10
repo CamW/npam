@@ -3,57 +3,80 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Npam.Tests
 {
     public class NpamUserTests
     {
-        [Fact]
-        public void TestAuthForGoodUser() 
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public NpamUserTests(ITestOutputHelper testOutputHelper)
         {
-            Assert.True(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood, NpamTestsCommon.TestPassword));
+            _testOutputHelper = testOutputHelper;
         }
 
         [Fact]
-        public void TestAuthFailForBadUser() 
+        public void TestAuthForGoodUser()
         {
-            Assert.False(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad, NpamTestsCommon.TestPassword));
+            Assert.True(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood,
+                NpamTestsCommon.TestPassword));
         }
 
         [Fact]
-        public void TestGroupsForGoodUser() 
+        public void TestAuthFailForBadUser()
+        {
+            Assert.False(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad,
+                NpamTestsCommon.TestPassword));
+        }
+
+        [Fact]
+        public void TestGroupsForGoodUser()
         {
             var groups = NpamUser.GetGroups(NpamTestsCommon.TestUsernameGood);
-            foreach(var theGroup in groups) {
+            foreach (var theGroup in groups)
+            {
                 Assert.Equal(NpamTestsCommon.TestUsernameGood, theGroup.GroupName);
             }
         }
 
         [Fact]
-        public void TestGroupsFailForBadUser() 
+        public void TestGroupsFailForBadUser()
         {
-            Assert.Equal(0, NpamUser.GetGroups(NpamTestsCommon.TestUsernameBad).ToList().Count);
+            Assert.Empty(NpamUser.GetGroups(NpamTestsCommon.TestUsernameBad).ToList());
         }
 
         [Fact]
-        public void TestAuthForGoodUserThreaded() 
+        public void TestAuthForGoodUserThreaded()
         {
-            const int TotalAuthCalls = 5000;
-            Console.WriteLine("Running {0} threaded auth tests...", TotalAuthCalls);
+            const int totalAuthCalls = 5000;
+            _testOutputHelper.WriteLine("Running {0} threaded auth tests...", totalAuthCalls);
             var complete = 0;
             var sw = new Stopwatch();
             sw.Start();
-            for(var i = 0; i < (TotalAuthCalls / 2); i++) {
-               var thread1 = new Thread(() => { Assert.True(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood, NpamTestsCommon.TestPassword)); Interlocked.Increment(ref complete); });
-               var thread2 = new Thread(() => { Assert.False(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad, NpamTestsCommon.TestPassword)); Interlocked.Increment(ref complete); });
-               thread1.Start();
-               thread2.Start();
+            for (var i = 0; i < (totalAuthCalls / 2); i++)
+            {
+                var thread1 = new Thread(() =>
+                {
+                    Assert.True(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood,
+                        NpamTestsCommon.TestPassword));
+                    Interlocked.Increment(ref complete);
+                });
+                var thread2 = new Thread(() =>
+                {
+                    Assert.False(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad,
+                        NpamTestsCommon.TestPassword));
+                    Interlocked.Increment(ref complete);
+                });
+                thread1.Start();
+                thread2.Start();
             }
-            while(complete < TotalAuthCalls) Thread.Sleep(1);
+
+            while (complete < totalAuthCalls) Thread.Sleep(1);
             sw.Stop();
-            Console.WriteLine("Completed {0} threaded auth tests in {1} seconds.", complete, sw.Elapsed.TotalSeconds);
+            _testOutputHelper.WriteLine("Completed {0} threaded auth tests in {1} seconds.", complete, sw.Elapsed.TotalSeconds);
             Thread.Sleep(2000);
-            Assert.Equal(TotalAuthCalls, complete);
+            Assert.Equal(totalAuthCalls, complete);
         }
     }
 }
