@@ -1,4 +1,4 @@
-namespace Npam.Test
+namespace Npam.Tests
 {
     public class NpamTestsCommon
     {

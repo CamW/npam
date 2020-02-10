@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using Xunit;
 
-namespace Npam.Test
+namespace Npam.Tests
 {
     public class NpamUserTests
     {
@@ -41,9 +41,9 @@ namespace Npam.Test
             const int TotalAuthCalls = 5000;
             Console.WriteLine("Running {0} threaded auth tests...", TotalAuthCalls);
             var complete = 0;
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
-            for(int i = 0; i < (TotalAuthCalls / 2); i++) {
+            for(var i = 0; i < (TotalAuthCalls / 2); i++) {
                var thread1 = new Thread(() => { Assert.True(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood, NpamTestsCommon.TestPassword)); Interlocked.Increment(ref complete); });
                var thread2 = new Thread(() => { Assert.False(NpamUser.Authenticate(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad, NpamTestsCommon.TestPassword)); Interlocked.Increment(ref complete); });
                thread1.Start();

@@ -1,57 +1,65 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using Npam.Interop;
-using Npam;
 
-namespace Npam.Example
+namespace Npam.Example.Session
 {
     public class Program
     {
         const string PamServiceName = "passwd";
 
-        public static void Main(string[] args){
-            
+        public static void Main(string[] args)
+        {
             Console.Write("Username: ");
-	        string user = Console.ReadLine();
+            var user = Console.ReadLine();
 
-            using (NpamSession mySession = new NpamSession(PamServiceName, user, ConvHandler, IntPtr.Zero)) {
-                var retval = mySession.Start();
-                if (retval == PamStatus.PAM_SUCCESS) {
-                    Console.WriteLine("START - SUCCESS!");
-                    retval = mySession.Authenticate(0);
-                    if (retval == PamStatus.PAM_SUCCESS) {
-                        Console.WriteLine("AUTHENTICATION - SUCCESS!");
-                        retval = mySession.AccountManagement(0);
-                        if (retval == PamStatus.PAM_SUCCESS) {
-                            Console.WriteLine("ACCESS - SUCCESS!");
-                        } else {
-                            Console.WriteLine("ACCESS - Failure: {0}", retval);
-                        }
+            using var mySession = new NpamSession(PamServiceName, user, ConvHandler, IntPtr.Zero);
+            var retVal = mySession.Start();
+            if (retVal == PamStatus.PamSuccess)
+            {
+                Console.WriteLine("START - SUCCESS!");
+                retVal = mySession.Authenticate(0);
+                if (retVal == PamStatus.PamSuccess)
+                {
+                    Console.WriteLine("AUTHENTICATION - SUCCESS!");
+                    retVal = mySession.AccountManagement(0);
+                    if (retVal == PamStatus.PamSuccess)
+                    {
+                        Console.WriteLine("ACCESS - SUCCESS!");
                     }
-                    else {
-                        Console.WriteLine("AUTHENTICATION - Failure: {0}", retval);
+                    else
+                    {
+                        Console.WriteLine("ACCESS - Failure: {0}", retVal);
                     }
-                } else {
-                    Console.WriteLine("START - Failure: {0}", retval);
                 }
+                else
+                {
+                    Console.WriteLine("AUTHENTICATION - Failure: {0}", retVal);
+                }
+            }
+            else
+            {
+                Console.WriteLine("START - Failure: {0}", retVal);
             }
         }
 
-        private static IEnumerable<PamResponse> ConvHandler (IEnumerable<PamMessage> messages, IntPtr appData) {
-            foreach (PamMessage message in messages)
+        private static IEnumerable<PamResponse> ConvHandler(IEnumerable<PamMessage> messages, IntPtr appData)
+        {
+            foreach (var message in messages)
             {
-                string response = "";
+                var response = "";
 
-                switch (message.MsgStyle) {
-                    case MessageStyle.PAM_PROMPT_ECHO_ON :
+                switch (message.MsgStyle)
+                {
+                    case MessageStyle.PamPromptEchoOn:
                         Console.Write(message.Message);
                         response = Console.ReadLine();
                         break;
-                    case MessageStyle.PAM_PROMPT_ECHO_OFF :
+                    case MessageStyle.PamPromptEchoOff:
                         Console.Write(message.Message);
-                        response  = AcceptInputNoEcho();
+                        response = AcceptInputNoEcho();
                         break;
-                    case MessageStyle.PAM_ERROR_MSG :
+                    case MessageStyle.PamErrorMsg:
                         Console.Error.WriteLine(message.Message);
                         break;
                     default:
@@ -66,10 +74,10 @@ namespace Npam.Example
 
         private static string AcceptInputNoEcho()
         {
-            string password = "";
+            var password = "";
             while (true)
             {
-                ConsoleKeyInfo i = Console.ReadKey(true);
+                var i = Console.ReadKey(true);
                 if (i.Key == ConsoleKey.Enter)
                 {
                     Console.WriteLine();
@@ -86,7 +94,8 @@ namespace Npam.Example
                 {
                     password += (i.KeyChar);
                 }
-            }   
+            }
+
             return password;
         }
     }

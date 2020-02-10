@@ -5,40 +5,45 @@ using Npam.Interop;
 namespace Npam
 {
     public static class NpamUser
-    { 
+    {
         private const int AuthenticateFlags = 0;
         private const int AccountManagementFlags = 0;
 
-        public static bool Authenticate(string serviceName, string user, string password) {
+        public static bool Authenticate(string serviceName, string user, string password)
+        {
             //Initialize
-            PamStatus lastReturnedValue = PamStatus.PAM_SUCCESS;
-            IntPtr pamHandle = IntPtr.Zero;
-            PamConv conversation = new PamConv();
-            ConversationHandler conversationHandler = new ConversationHandler(password);
+            var lastReturnedValue = PamStatus.PamSuccess;
+            var pamHandle = IntPtr.Zero;
+            var conversation = new PamConv();
+            var conversationHandler = new ConversationHandler(password);
             conversation.ConversationCallback = conversationHandler.HandlePamConversation;
 
-            try {
+            try
+            {
                 //Start
                 lastReturnedValue = Pam.pam_start(serviceName, user, conversation, ref pamHandle);
-                if (lastReturnedValue != PamStatus.PAM_SUCCESS) return false;
+                if (lastReturnedValue != PamStatus.PamSuccess) return false;
                 //Authenticate - Verifies username and password
                 lastReturnedValue = Pam.pam_authenticate(pamHandle, AuthenticateFlags);
-                if (lastReturnedValue != PamStatus.PAM_SUCCESS) return false;
+                if (lastReturnedValue != PamStatus.PamSuccess) return false;
                 //Account Management - Checks that account is valid, checks account expiration, access restrictions.
                 lastReturnedValue = Pam.pam_acct_mgmt(pamHandle, AccountManagementFlags);
-                if (lastReturnedValue != PamStatus.PAM_SUCCESS) return false;
-            } finally {
+                if (lastReturnedValue != PamStatus.PamSuccess) return false;
+            }
+            finally
+            {
                 lastReturnedValue = Pam.pam_end(pamHandle, lastReturnedValue);
             }
 
             return true;
         }
 
-        public static IEnumerable<Group> GetGroups(string user) {
-            AccountInfo info = StdLibC.GetPwNamAsAccountInfo(user);
+        public static IEnumerable<Group> GetGroups(string user)
+        {
+            var info = StdLibC.GetPwNamAsAccountInfo(user);
             if (info == null) yield break;
-            int numGroups = 0;
-            int[] groupIdArray = new int[numGroups];
+            var numGroups = 0;
+            var groupIdArray = new int[numGroups];
             StdLibC.getgrouplist(user, info.GroupID, groupIdArray, ref numGroups);
             groupIdArray = new int[numGroups];
             StdLibC.getgrouplist(user, info.GroupID, groupIdArray, ref numGroups);
@@ -50,28 +55,36 @@ namespace Npam
         /// Gets information on the specified user such as real name, shell and home directory.
         /// http://linux.die.net/man/3/getpwnam
         ///</summary>
-        public static AccountInfo GetAccountInfo(string user) {
+        public static AccountInfo GetAccountInfo(string user)
+        {
             return StdLibC.GetPwNamAsAccountInfo(user);
         }
 
-        internal class ConversationHandler {
+        internal class ConversationHandler
+        {
+            private readonly string _password;
 
-            private string password;
-
-            public ConversationHandler(string password) {
-                this.password = password;
+            public ConversationHandler(string password)
+            {
+                this._password = password;
             }
 
-            public PamStatus HandlePamConversation(int messageCount, IntPtr messageArrayPtr, ref IntPtr responseArrayPtr,  IntPtr appDataPtr) {
-                if (messageCount <= 0) return PamStatus.PAM_CONV_ERR;
+            public PamStatus HandlePamConversation(int messageCount, IntPtr messageArrayPtr,
+                ref IntPtr responseArrayPtr, IntPtr appDataPtr)
+            {
+                if (messageCount <= 0) return PamStatus.PamConvErr;
                 var messages = MarshalUtils.MarshalPtrPtrStructIn<PamMessage>(messageCount, messageArrayPtr);
-                if (messageCount == 1) {
-                    responseArrayPtr = MarshalUtils.MarshalPtrStructOut<PamResponse>(new PamResponse(password));
-                } else {
-                    throw new NotSupportedException("NpamAuthentication does not support PAM modules which require responses to multiple conversational messages. Please use NpamSession instead.");
+                if (messageCount == 1)
+                {
+                    responseArrayPtr = MarshalUtils.MarshalPtrStructOut(new PamResponse(_password));
+                }
+                else
+                {
+                    throw new NotSupportedException(
+                        "NpamAuthentication does not support PAM modules which require responses to multiple conversational messages. Please use NpamSession instead.");
                 }
 
-                return PamStatus.PAM_SUCCESS;
+                return PamStatus.PamSuccess;
             }
         }
     }

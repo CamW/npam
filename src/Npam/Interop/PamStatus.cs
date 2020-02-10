@@ -1,68 +1,68 @@
-namespace Npam.Interop{
-
+namespace Npam.Interop
+{
     ///<summary>
     /// The PAM return values.
     ///</summary>
-    public enum PamStatus {
-        
+    public enum PamStatus
+    {
         /// <summary>
         /// Successful function return.
         /// </summary>
-        PAM_SUCCESS = 0,
+        PamSuccess = 0,
 
         /// <summary>
         /// dlopen() failure when dynamically
         /// loading a service module.
         /// </summary>
-        PAM_OPEN_ERR = 1,
-        
+        PamOpenErr = 1,
+
         /// <summary>
         /// Symbol not found.
         /// </summary>
-        PAM_SYMBOL_ERR = 2,
+        PamSymbolErr = 2,
 
         /// <summary>
         /// Error in service module.
         /// </summary>
-        PAM_SERVICE_ERR = 3,
+        PamServiceErr = 3,
 
         /// <summary>
         /// System error.
         /// </summary>
-        PAM_SYSTEM_ERR = 4,
+        PamSystemErr = 4,
 
         /// <summary>
         /// Memory buffer error.
         /// </summary>
-        PAM_BUF_ERR = 5,
+        PamBufErr = 5,
 
         /// <summary>
         /// Permission denied.
         /// </summary>
-        PAM_PERM_DENIED = 6,
+        PamPermDenied = 6,
 
         /// <summary>
         /// Authentication failure.
         /// </summary>
-        PAM_AUTH_ERR = 7,
+        PamAuthErr = 7,
 
         /// <summary>
         /// Can not access authentication data
         /// due to insufficient credentials.
         /// </summary>
-        PAM_CRED_INSUFFICIENT = 8,
+        PamCredInsufficient = 8,
 
         /// <summary>
         /// Underlying authentication service
         /// can not retrieve authentication
         /// information.
         /// </summary>
-        PAM_AUTHINFO_UNAVAIL = 9,  
+        PamAuthInfoUnavailable = 9,
 
         /// <summary>
-        /// User not known to the underlying authenticaiton module.
+        /// User not known to the underlying authentication module.
         /// </summary>
-        PAM_USER_UNKNOWN = 10,
+        PamUserUnknown = 10,
 
         /// <summary>
         /// An authentication service has
@@ -70,112 +70,113 @@ namespace Npam.Interop{
         /// been reached.  No further retries
         /// should be attempted.
         /// </summary>
-        PAM_MAXTRIES = 11,     
+        PamMaxTries = 11,
 
         /// <summary>
         /// New authentication token required.
         /// This is normally returned if the
         /// machine security policies require
         /// that the password should be changed
-        /// beccause the password is NULL or it
+        /// because the password is NULL or it
         /// has aged.
         /// </summary>
-        PAM_NEW_AUTHTOK_REQD = 12,
+        PamNewAuthTokenRequired = 12,
 
         /// <summary>
         /// User account has expired.
         /// </summary>
-        PAM_ACCT_EXPIRED = 13,
+        PamAcctExpired = 13,
 
         /// <summary>
         /// Can not make/remove an entry for
         /// the specified session.
         /// </summary>
-        PAM_SESSION_ERR = 14,
+        PamSessionErr = 14,
 
         /// <summary>
         /// Underlying authentication service
         /// can not retrieve user credentials
         /// unavailable.
         /// </summary>
-        PAM_CRED_UNAVAIL = 15,
+        PamCredUnavailable = 15,
 
         /// <summary>
         /// User credentials expired
         /// </summary>
-        PAM_CRED_EXPIRED = 16,
+        PamCredExpired = 16,
 
         /// <summary>
         /// Failure setting user credentials.
         /// </summary>
-        PAM_CRED_ERR = 17,
+        PamCredErr = 17,
 
         /// <summary>
         /// No module specific data is present.
         /// </summary>
-        PAM_NO_MODULE_DATA = 18,
+        PamNoModuleData = 18,
 
         /// <summary>
         /// Conversation error.
         /// </summary>
-        PAM_CONV_ERR = 19,
+        PamConvErr = 19,
 
         /// <summary>
         /// Authentication token manipulation error.
         /// </summary>
-        PAM_AUTHTOK_ERR = 20,
+        PamAuthTokenErr = 20,
 
         /// <summary>
         /// Authentication information cannot be recovered.
         /// </summary>
-        PAM_AUTHTOK_RECOVERY_ERR = 21,
+        PamAuthTokenRecoveryErr = 21,
 
         /// <summary>
         /// Authentication token lock busy.
         /// </summary>
-        PAM_AUTHTOK_LOCK_BUSY = 22,
+        PamAuthTokenLockBusy = 22,
 
         /// <summary>
         /// Authentication token aging disabled.
         /// </summary>
-        PAM_AUTHTOK_DISABLE_AGING = 23,
+        PamAuthTokenDisableAging = 23,
 
         /// <summary>
         /// Preliminary check by password service.
         /// </summary>
-        PAM_TRY_AGAIN = 24,
+        PamTryAgain = 24,
 
         /// <summary>
         /// Ignore underlying account module
         /// regardless of whether the control
         /// flag is required, optional, or sufficient.
         /// </summary>
-        PAM_IGNORE = 25,
+        PamIgnore = 25,
+
         /// <summary>
         /// Critical error (?module fail now request).
         /// </summary>
-        PAM_ABORT = 26,
+        PamAbort = 26,
 
         /// <summary>
         /// User's authentication token has expired.
         /// </summary>
-        PAM_AUTHTOK_EXPIRED = 27, 
+        PamAuthTokenExpired = 27,
 
         /// <summary>
         /// Module is not known.
         /// </summary>
-        PAM_MODULE_UNKNOWN = 28,
+        PamModuleUnknown = 28,
 
         /// <summary>
         /// Bad item passed to pam_*_item().
         /// </summary>
-        PAM_BAD_ITEM = 29,
+        PamBadItem = 29,
 
         /// <summary>
         ///Conversation function is event driven
         ///and data is not available yet.
         /// </summary>
-        PAM_CONV_AGAIN = 30,
+        PamConvAgain = 30,
 
         /// <summary>
         /// Please call this function again to
@@ -183,6 +184,6 @@ namespace Npam.Interop{
         /// calling again, verify that conversation
         /// is completed.
         /// </summary>
-        PAM_INCOMPLETE = 31,
+        PamIncomplete = 31,
     }
 }

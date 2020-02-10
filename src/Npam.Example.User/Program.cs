@@ -1,20 +1,19 @@
 ﻿using System;
-using Npam;
 
-namespace ConsoleApplication
+namespace Npam.Example.User
 {
     public class Program
     {
-        const string PamServiceName = "passwd";
+        private const string PamServiceName = "passwd";
 
         public static void Main(string[] args)
         {
             Console.Write("Username: ");
-	        string user = Console.ReadLine();
+            var user = Console.ReadLine();
             Console.Write("Password: ");
-	        string password  = AcceptInputNoEcho();
+            var password = AcceptInputNoEcho();
 
-            if (NpamUser.Authenticate(PamServiceName, user, password)) 
+            if (NpamUser.Authenticate(PamServiceName, user, password))
             {
                 Console.WriteLine("AUTHENTICATION - SUCCESS!");
                 Console.WriteLine("\rUSER GROUPS:");
@@ -22,22 +21,22 @@ namespace ConsoleApplication
                 {
                     Console.WriteLine("\t{0}", userGroup);
                 }
+
                 Console.WriteLine("\rUSER INFO:");
                 Console.WriteLine("\t{0}", NpamUser.GetAccountInfo(user));
-                
-            } 
-            else 
+            }
+            else
             {
                 Console.WriteLine("AUTHENTICATION - FAILURE!");
             }
         }
-        
+
         private static string AcceptInputNoEcho()
         {
-            string password = "";
+            var password = "";
             while (true)
             {
-                ConsoleKeyInfo i = Console.ReadKey(true);
+                var i = Console.ReadKey(true);
                 if (i.Key == ConsoleKey.Enter)
                 {
                     Console.WriteLine();
@@ -54,9 +53,9 @@ namespace ConsoleApplication
                 {
                     password += (i.KeyChar);
                 }
-            }   
+            }
+
             return password;
         }
-
     }
 }

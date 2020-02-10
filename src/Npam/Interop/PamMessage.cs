@@ -8,8 +8,9 @@ namespace Npam.Interop
     /// library (or loaded module).
     ///</summary>
     [StructLayout(LayoutKind.Sequential)]
-    public class PamMessage {
-            public MessageStyle MsgStyle;
-            public string Message;
+    public class PamMessage
+    {
+        public MessageStyle MsgStyle;
+        public string Message;
     }
 }

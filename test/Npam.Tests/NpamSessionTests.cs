@@ -1,52 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Npam.Interop;
 using Xunit;
 
-namespace Npam.Test
+namespace Npam.Tests
 {
     public class NpamSessionTests
     {
-        private static IEnumerable<PamResponse> ConvHandler (IEnumerable<PamMessage> messages, IntPtr appData) {
-            foreach (PamMessage message in messages)
-            {
-                yield return new PamResponse(NpamTestsCommon.TestPassword);
-            }
+        private static IEnumerable<PamResponse> ConvHandler(IEnumerable<PamMessage> messages, IntPtr appData)
+        {
+            return messages.Select(message => new PamResponse(NpamTestsCommon.TestPassword));
         }
 
 
         [Fact]
-        public void TestAuthForGoodUser() 
+        public void TestAuthForGoodUser()
         {
-            long start = DateTime.Now.Ticks;
-            IntPtr appData = Marshal.AllocHGlobal(Marshal.SizeOf<long>());
+            var start = DateTime.Now.Ticks;
+            var appData = Marshal.AllocHGlobal(Marshal.SizeOf<long>());
             Marshal.WriteInt64(appData, 0, start);
 
-            NpamSession session = null; 
-            using (session = new NpamSession(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood, ConvHandler, appData)) {
-                Assert.Equal(PamStatus.PAM_SUCCESS, session.Start());
+            NpamSession session = null;
+            using (session = new NpamSession(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameGood, ConvHandler,
+                appData))
+            {
+                Assert.Equal(PamStatus.PamSuccess, session.Start());
                 Assert.Throws<InvalidOperationException>(() => { session.Start(); });
-                Assert.Equal(PamStatus.PAM_SUCCESS, session.Authenticate(0));
-                Assert.Equal(PamStatus.PAM_SUCCESS, session.AccountManagement(0));
+                Assert.Equal(PamStatus.PamSuccess, session.Authenticate(0));
+                Assert.Equal(PamStatus.PamSuccess, session.AccountManagement(0));
             }
+
             Assert.Throws<InvalidOperationException>(() => { session.AccountManagement(0); });
         }
 
         [Fact]
-        public void TestFailForBadUser() 
+        public void TestFailForBadUser()
         {
-            long start = DateTime.Now.Ticks;
-            IntPtr appData = Marshal.AllocHGlobal(Marshal.SizeOf<long>());
+            var start = DateTime.Now.Ticks;
+            var appData = Marshal.AllocHGlobal(Marshal.SizeOf<long>());
             Marshal.WriteInt64(appData, 0, start);
 
-            NpamSession session = null; 
-            using (session = new NpamSession(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad, ConvHandler, appData)) {
-                Assert.Equal(PamStatus.PAM_SUCCESS, session.Start());
+            NpamSession session = null;
+            using (session = new NpamSession(NpamTestsCommon.TestService, NpamTestsCommon.TestUsernameBad, ConvHandler,
+                appData))
+            {
+                Assert.Equal(PamStatus.PamSuccess, session.Start());
                 Assert.Throws<InvalidOperationException>(() => { session.Start(); });
-                Assert.Equal(PamStatus.PAM_AUTH_ERR, session.Authenticate(0));
-                Assert.Equal(PamStatus.PAM_AUTH_ERR, session.AccountManagement(0));
+                Assert.Equal(PamStatus.PamAuthErr, session.Authenticate(0));
+                Assert.Equal(PamStatus.PamAuthErr, session.AccountManagement(0));
             }
+
             Assert.Throws<InvalidOperationException>(() => { session.AccountManagement(0); });
         }
     }

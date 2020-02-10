@@ -8,16 +8,18 @@ namespace Npam.Interop
     /// the Linux-PAM library (or calling module).
     ///</summary>
     [StructLayout(LayoutKind.Sequential)]
-    public class PamResponse {
-            
-            public PamResponse() {
-            }
+    public class PamResponse
+    {
+        public PamResponse()
+        {
+        }
 
-            public PamResponse(string response) {
-                this.Response = response;
-            }
-            
-            public string Response;
-            public int ReturnCode = 0; //currently un-used, zero expected
+        public PamResponse(string response)
+        {
+            this.Response = response;
+        }
+
+        public string Response;
+        public int ReturnCode = 0; //currently un-used, zero expected
     }
 }
