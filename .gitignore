@@ -14,7 +14,7 @@
 
 # User-specific files
 *.suo
-*.user
+# *.user # Disabled, because it ignored the Npam.Example.User folder also...
 *.userosscache
 *.sln.docstates
 
