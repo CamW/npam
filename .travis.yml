@@ -8,5 +8,5 @@ install:
 script:
 - dotnet build
 - ./test/setup_test_account.sh
-- dotnet test test/Npam.Tests/Npam.Tests.csproj
+- sudo dotnet test test/Npam.Tests/Npam.Tests.csproj
 
