@@ -1,4 +1,7 @@
 # Npam
+
+[![Build Status](https://travis-ci.com/CamW/npam.svg?branch=master)](https://travis-ci.com/CamW/npam)
+
 Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information. Npam is built on Linux-PAM but should easily work with other unix systems.
 
 ##### Table of Contents  
@@ -16,7 +19,7 @@ Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentica
 4. [Future Plans](#future-plans)
 
 ## Compatibility
-Npam has been tested on Ubuntu 16.04 (dotnet version 1.0.0-preview2-003121) and Fedora 23 (dotnet version 1.0.0-preview2-003121). However, PAM is available on most *nix systems and this library should work on Mac, BSD and most linux distros. So feel free to give it a try and create a PR or issue if you run into any problems.
+Npam has been tested on Ubuntu 16.04 (dotnet core version 3.1). However, PAM is available on most linux and unix systems and this library should work on Mac, BSD and most linux distros. So feel free to give it a try and create a PR or issue if you run into any problems.
 
 ## Using the Npam Library
 
