@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+	<TargetFramework>netstandard1.2</TargetFramework>
+	<PackageId>Npam</PackageId>
+	<Version>1.0.1</Version>
+	<Authors>Cameron Waldron</Authors>
   </PropertyGroup>
 
 </Project>
