@@ -35,7 +35,7 @@ As below, you'll need to add a Npam dependency to your app's project.json and ru
 {
   "name" : "Npam-sample",
   ...
-  "dependencies": { "Npam" : "1.0.0" },
+  "dependencies": { "Npam" : "1.0.1" },
   ...
 }
 ```
