@@ -1,8 +1,8 @@
 # Npam
 
-![GitHub](https://img.shields.io/github/license/camw/npam)
+[![GitHub](https://img.shields.io/github/license/camw/npam)](https://github.com/CamW/npam/blob/master/LICENSE)
 [![Build Status](https://travis-ci.com/CamW/npam.svg?branch=master)](https://travis-ci.com/CamW/npam)
-![Nuget](https://img.shields.io/nuget/dt/npam)
+[![Nuget](https://img.shields.io/nuget/dt/npam)](https://www.nuget.org/packages/Npam)
 
 Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information. Npam is built on Linux-PAM but should easily work with other unix systems.
 
