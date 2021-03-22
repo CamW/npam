@@ -1,3 +1,5 @@
+os: linux
+dist: focal
 language: csharp
 mono: none
 dotnet: 3.1
@@ -13,7 +15,7 @@ after_success:
 before_deploy:
 - dotnet pack -c Release
 deploy:
-  skip_cleanup: true
+  cleanup: false
   provider: script
   script: dotnet nuget push ./src/Npam/bin/Release/Npam.*.nupkg -k $NUGET_API -s https://api.nuget.org/v3/index.json --skip-duplicate
   on:
