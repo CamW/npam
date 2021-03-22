@@ -5,6 +5,8 @@
 	<PackageId>Npam</PackageId>
 	<Version>1.0.2</Version>
 	<Authors>Cameron Waldron</Authors>
+	<Description>Npam is a dotnet core interface and wrapper around the UNIX Pluggable Authentication Modules (PAM) libraries. Npam also includes dotnet core interfaces into other related library calls for group and account information.</Description>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>
