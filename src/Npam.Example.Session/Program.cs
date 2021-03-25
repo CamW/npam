@@ -7,6 +7,7 @@ namespace Npam.Example
 {
     public class Program
     {
+	//const string PamServiceName = "password-auth"; //For RHEL based Linux
         const string PamServiceName = "passwd";
 
         public static void Main(string[] args){
