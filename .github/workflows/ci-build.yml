@@ -1,0 +1,32 @@
+# This workflow will build and test the npam code according to the README
+name: ci-build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install ubuntu packages required
+      run: |
+        sudo apt install -y libpam0g-dev
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore ${{ github.workspace }}/Npam.sln
+    - name: Build
+      run: dotnet build --no-restore ${{ github.workspace }}/Npam.sln
+    - name: Test
+      run: |
+        ${{ github.workspace }}/test/setup_test_account.sh
+        dotnet test --no-build --verbosity normal ${{ github.workspace }}/test/**/*.csproj
