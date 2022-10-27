@@ -29,4 +29,4 @@ jobs:
     - name: Test
       run: |
         ${{ github.workspace }}/test/setup_test_account.sh
-        dotnet test --no-build --verbosity normal ${{ github.workspace }}/test/**/*.csproj
+        sudo dotnet test --no-build --verbosity normal ${{ github.workspace }}/test/**/*.csproj
